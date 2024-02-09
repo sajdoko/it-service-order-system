@@ -7,7 +7,7 @@ import Interfaces.Item;
 import java.util.HashMap;
 import java.util.Map;
 
-class Order {
+public class Order {
     private final Map<Item, Integer> items;
     private boolean locked;
 
@@ -46,34 +46,17 @@ class Order {
         items.put(item, count);
     }
 
-    /**
-     * Calculates and returns the total price of the order.
-     *
-     * @return The total price.
-     */
-    public int getPrice() {
-        int total = 0;
-        for (Map.Entry<Item, Integer> entry : items.entrySet()) {
-            total += entry.getKey().getPrice() * entry.getValue();
-        }
-        return total;
+    public void removeItem(Item item) {
+        items.remove(item);
     }
 
     /**
-     * Displays the order details to the console.
-     * If the order is empty, it prints a specific message.
+     * Retrieves the items in the order.
+     *
+     * @return The items in the order.
      */
-    public void displayOrder() {
-        if (items.isEmpty()) {
-            System.out.println("The order is empty.");
-            return;
-        }
-
-        System.out.println("Order:");
-        for (Map.Entry<Item, Integer> entry : items.entrySet()) {
-            System.out.println(entry.getKey() + " x" + entry.getValue() + " $" + entry.getKey().getPrice() * entry.getValue());
-        }
-        System.out.println("Total: $" + getPrice());
+    public Map<Item, Integer> getItems() {
+        return items;
     }
 
     /**
@@ -87,5 +70,21 @@ class Order {
             throw new EmptyOrderException();
         }
         locked = true;
+    }
+
+    /**
+     * Clears the current order.
+     * This method removes all items from the order and unlocks it.
+     */
+    public void clearOrder() {
+        items.clear();
+        locked = false;
+    }
+
+    /**
+     * Unlocks the order.
+     */
+    public void unlock() {
+        locked = false;
     }
 }

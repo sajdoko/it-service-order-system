@@ -24,11 +24,11 @@ class ITService implements Item {
         this.price = price;
     }
 
-    /**
-     * Retrieves the price of the service.
-     *
-     * @return The price of the service.
-     */
+    @Override
+    public String getName() {
+        return name;
+    }
+
     @Override
     public int getPrice() {
         return price;
@@ -41,7 +41,7 @@ class ITService implements Item {
      */
     @Override
     public String toString() {
-        return name + " - $" + price;
+        return name;
     }
 
     /**
